@@ -1,6 +1,11 @@
 import * as React from 'react'                          
 import * as ReactDOM from 'react-dom'      
-                                                        
+import Editor from "react-simple-code-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-ruby";
+import "prismjs/themes/prism.css"; //Example style, you can use another
+
 class Hello extends React.Component {
   constructor() {
     super();
@@ -36,8 +41,12 @@ class Hello extends React.Component {
   }
 
   handleRubyTextChange = (e) => {
-    this.setState({rubyText: e.target.value});
-    this.updateDisasm(e.target.value, this.state.optimizations);
+    this.setState({rubyText: e});
+    this.updateDisasm(e, this.state.optimizations);
+  }
+
+  handleEditorStateChange = (editorState) => {
+    this.setState({editorState})
   }
 
   handleCheckbox = (e) => {
@@ -47,15 +56,26 @@ class Hello extends React.Component {
     this.updateDisasm(this.state.rubyText, tempOptimizations);
   }
 
-  
-
   render () {
     return (
       <div id="full_view_container">
         <div id="ide_container">
           <h1 id="title_container">Shipley's Gia Inspect</h1>
           <div class="text_form_box_container">
-            <textarea class="text_form_box" id="myform_inputbox" value={this.state.rubyText} onChange={this.handleRubyTextChange}/>
+            <div className="text_form_box" id="myform_inputbox">
+              {/* <Editor  editorState={this.state.editorState} onChange={this.handleEditorStateChange}/> */}
+             <Editor
+              value={this.state.rubyText}
+              onValueChange={this.handleRubyTextChange}
+              highlight={(code) => highlight(code, languages.rb)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 12,
+              }}
+            />
+            </div>
+            {/* <Editor editorState={this.state.editorState} onChange={this.handleEditorStateChange}/> */}
             <textarea class="text_form_box" id="disasm_box" value={this.state.disasmText}/>
           </div>
         </div>
