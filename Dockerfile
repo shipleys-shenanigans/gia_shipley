@@ -7,6 +7,5 @@ COPY Gemfile.lock /app/backend/Gemfile.lock
 RUN bundle install
 COPY . /app/backend
 RUN npm install
-ARG BIND=0.0.0.0
 
-EXPOSE 3000
+EXPOSE $PORT
