@@ -25,6 +25,14 @@ class Hello extends React.Component {
     }
   }
 
+  // This (and accompanying css) copy-pasta from:
+  //    https://codesandbox.io/s/react-simple-editor-linenumbers-wy240?from-embed=&file=/src/index.js:867-919
+  hightlightWithLineNumbers = (input, language) =>
+    highlight(input, language)
+      .split("\n")
+      .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+      .join("\n");
+
   updateDisasm(currentRubyText, currentOptimization) {
     const url = "/gia/disasm?description=" +
       encodeURIComponent(currentRubyText) + 
@@ -67,12 +75,10 @@ class Hello extends React.Component {
              <Editor
               value={this.state.rubyText}
               onValueChange={this.handleRubyTextChange}
-              highlight={(code) => highlight(code, languages.rb)}
+              highlight={(code) => this.hightlightWithLineNumbers(code, languages.rb)}
               padding={10}
-              style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 12,
-              }}
+              textareaId="codeArea"
+              className="editor"
             />
             </div>
             {/* <Editor editorState={this.state.editorState} onChange={this.handleEditorStateChange}/> */}
