@@ -10,7 +10,7 @@ COPY Gemfile /app/backend/Gemfile
 COPY Gemfile.lock /app/backend/Gemfile.lock
 RUN bundle install
 COPY . /app/backend
-RUN yarn build
 RUN npm install
+RUN yarn build
 
 EXPOSE $PORT
