@@ -10,6 +10,9 @@ RUN mkdir -p /app/backend
 WORKDIR /app/backend
 COPY Gemfile /app/backend/Gemfile
 COPY Gemfile.lock /app/backend/Gemfile.lock
+
+# gems cache fix as per:
+# https://stackoverflow.com/questions/66308227/could-not-find-nokogiri-1-11-1-in-any-of-the-sources-while-deploying-a-heroku-ap
 RUN rm -rf vendor/cache
 RUN bundle config set force_ruby_platform true
 RUN bundle install
