@@ -10,6 +10,8 @@ RUN mkdir -p /app/backend
 WORKDIR /app/backend
 COPY Gemfile /app/backend/Gemfile
 COPY Gemfile.lock /app/backend/Gemfile.lock
+RUN rm -rf vendor/cache
+RUN bundle config set force_ruby_platform true
 RUN bundle install
 COPY . /app/backend
 RUN npm install
