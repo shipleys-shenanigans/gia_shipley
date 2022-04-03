@@ -1,6 +1,6 @@
 FROM shipleyshenanigans/shipleysruby:4.0.0
 
-RUN apt-get update -qq && apt-get install -y curl sqlite3 libsqlite3-dev build-essential libpq-dev nodejs npm
+RUN apt-get update -qq && apt-get install -y curl libsqlite3-dev build-essential libpq-dev nodejs npm
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update
