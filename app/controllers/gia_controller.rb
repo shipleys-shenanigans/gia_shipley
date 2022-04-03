@@ -25,4 +25,11 @@ class GiaController < ApplicationController
       render :json => some_text
     end
   end
+
+  def version
+    some_text = {
+      version: RUBY_VERSION
+    }
+    render :json => some_text
+  end
 end

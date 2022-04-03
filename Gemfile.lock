@@ -64,7 +64,6 @@ GEM
     activesupport (7.0.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
-      minitest (>= 5.1)
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
@@ -221,7 +220,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   puma (~> 5.0)
-  rails (~> 7.0.2, >= 7.0.2.3)
+  rails
   selenium-webdriver
   sprockets-rails
   sqlite3

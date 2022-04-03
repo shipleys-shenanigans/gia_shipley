@@ -14,6 +14,7 @@ class Hello extends React.Component {
     this.state = {
       rubyText: "",
       disasmText: "",
+      rubyVersion: "1.0.0",
       optimizations: {
         inline_const_cache: false,
         instructions_unification: false,
@@ -23,6 +24,18 @@ class Hello extends React.Component {
         tailcall_optimization: false
       }
     }
+  }
+
+  componentDidMount() {
+    const url = "/gia/version";
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => this.setState({ rubyVersion: response.version }))
   }
 
   // This (and accompanying css) copy-pasta from:
@@ -69,6 +82,7 @@ class Hello extends React.Component {
       <div id="full_view_container">
         <div id="ide_container">
           <h1 id="title_container">Shipley's Gia Inspect</h1>
+          <h4 id="subtitle_container">(Ruby version {this.state.rubyVersion})</h4>
           <div class="text_form_box_container">
             <div className="text_form_box" id="myform_inputbox">
               {/* <Editor  editorState={this.state.editorState} onChange={this.handleEditorStateChange}/> */}
